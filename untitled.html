@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Naber?</title>
+</head>
+<body>
+    
+</body>
+<script>
+    function uniquehandler(array){
+         let unique = [];
+         unique.push(array[0]);
+
+        for(var i=1; i<array.length; i++){
+            let elem = array[i];
+            let prev = array[i-1];
+
+            if(elem!==prev){
+                unique.push(elem);
+            }
+            
+        }
+
+        return unique;
+    }
+
+    function climbingLeaderboard(scores,alice){
+
+        for(var key in alice){
+            let arrayx=uniquehandler(scores);
+            if(scores.includes(alice[key])){
+                return scores.indexOf(alice[key])+1;
+                
+            } else {
+                arrayx.push(alice[key]);
+                arrayx.sort((a, b) => a - b);
+                arrayx.reverse();
+                
+                return arrayx.indexOf(alice[key])+1;
+            }
+
+        }
+
+    }
+
+   
+climbingLeaderboard([100,90,90,75,60],[50,65,77,90,102]);
+
+</script>
+</html>
