@@ -30,7 +30,7 @@
         for(var key in alice){
             let arrayx=uniquehandler(scores);
             if(scores.includes(alice[key])){
-                return scores.indexOf(alice[key])+1;
+                return arrayx.indexOf(alice[key])+1;
                 
             } else {
                 arrayx.push(alice[key]);
