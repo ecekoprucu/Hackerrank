@@ -8,47 +8,66 @@
     
 </body>
 <script>
-    function uniquehandler(array) {
-    let unique = [];
-    unique.push(array[0]);
+function uniquehandler(array){
+         let unique = [];
+         unique.push(array[0]);
 
-    for (var i = 1; i < array.length; i++) {
-        let elem = array[i];
-        let prev = array[i - 1];
+        for(var i=1; i<array.length; i++){
+            let elem = array[i];
+            let prev = array[i-1];
 
-        if (elem !== prev) {
-            unique.push(elem);
+            if(elem!==prev){
+                unique.push(elem);
+            }
+            
         }
 
+        return unique.reverse();
+    }
+    function binarySearch (list, value) {
+  // initial values for start, middle and end
+  
+  let start = 0;
+  let stop = list.length - 1;
+  let middle = Math.floor((start + stop) / 2);
+
+  // While the middle is not what we're looking for and the list does not have a single item
+  while (list[middle] !== value && start < stop) {
+    if (value > list[middle]) {
+      stop = middle - 1;
+    } else {
+      start = middle + 1;
     }
 
-    return unique;
+    // recalculate middle on every iteration
+    middle = Math.floor((start + stop) / 2);
+  }
+
+  // if the current middle item is what we're looking for return it's index, else return -1
+  return (list[middle] !== value) ? list.length - 1 : middle;
 }
 
-function climbingLeaderboard(scores, alice) {
-    let arrayx = uniquehandler(scores);
-    let result = [];
+    function climbingLeaderboard(scores,alice){
 
-    for (var key in alice) {
-        let dummy = Array.from(arrayx);
-        if (scores.includes(alice[key])) {
-            result.push(dummy.indexOf(alice[key]) + 1);
+        let res=[];
 
-        } else {
-            dummy.push(alice[key]);
-            dummy.sort((a, b) => a - b);
-            dummy.reverse();
+        for(var key in alice){
+            let arrayx=uniquehandler(scores);
+            if(scores.includes(alice[key])){
+                arrayx.reverse();
+                res.push(binarySearch(arrayx,alice[key])+1);
+                
+            } else {
+                arrayx.push(alice[key]);
+                arrayx.sort((a, b) => a - b);
+                arrayx.reverse();
+                
+                res.push(binarySearch(arrayx,alice[key])+1);
+            }
 
-            result.push(dummy.indexOf(alice[key]) + 1);
         }
-
+        return res;
     }
-    return result;
-}
-
-
-   
-climbingLeaderboard([100,90,90,75,60],[50,65,77,90,102]);
 
 </script>
 </html>
