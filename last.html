@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Naber?</title>
+</head>
+<body>
+    
+</body>
+<script>
+function uniquehandler(array){
+         let unique = [];
+         unique.push(array[0]);
+
+        for(var i=1; i<array.length; i++){
+            let elem = array[i];
+            let prev = array[i-1];
+
+            if(elem!==prev){
+                unique.push(elem);
+            }
+            
+        }
+
+        return unique.reverse();
+    }
+    function binarySearch (list, value) {
+  // initial values for start, middle and end
+  
+  let start = 0;
+  let stop = list.length - 1;
+  let middle = Math.floor((start + stop) / 2);
+
+  // While the middle is not what we're looking for and the list does not have a single item
+  while (list[middle] !== value && start < stop) {
+    if (value > list[middle]) {
+      stop = middle - 1;
+    } else {
+      start = middle + 1;
+    }
+
+    // recalculate middle on every iteration
+    middle = Math.floor((start + stop) / 2);
+  }
+
+  // if the current middle item is what we're looking for return it's index, else return -1
+  return (list[middle] !== value) ? list.length - 1 : middle;
+}
+
+    function climbingLeaderboard(scores,alice){
+
+        let res=[];
+
+        for(var key in alice){
+            let arrayx=uniquehandler(scores);
+            if(scores.includes(alice[key])){
+                arrayx.reverse();
+                res.push(binarySearch(arrayx,alice[key])+1);
+                
+            } else {
+                arrayx.push(alice[key]);
+                arrayx.sort((a, b) => a - b);
+                arrayx.reverse();
+                
+                res.push(binarySearch(arrayx,alice[key])+1);
+            }
+
+        }
+        return res;
+    }
+
+</script>
+</html>
